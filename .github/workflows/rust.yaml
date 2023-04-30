@@ -20,7 +20,7 @@ jobs:
         uses: dtolnay/rust-toolchain@nightly
         with:
           targets: wasm32-unknown-unknown
-          components: clippy
+          components: clippy, fmt
 
       - name: Run Check
         run: cargo check
