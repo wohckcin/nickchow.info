@@ -16,3 +16,16 @@ log = "0.4.17"
 wasm-bindgen = "0.2.84"
 console_log = "1.0.0"
 console_error_panic_hook = "0.1.7"
+
+[build]
+rustc-wrapper = "/opt/homebrew/bin/sccache"
+
+[profile.release]
+codegen-units = 4
+opt-level = 2
+lto = true
+
+[profile.ephemeral-build]
+opt-level = 2
+codegen-units = 8
+inherits = "release"

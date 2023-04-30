@@ -25,9 +25,9 @@ fn RadialProgress(
     cx: Scope,
     #[prop(into)] progress: Signal<i32>,
 ) -> impl IntoView {
-    // let nvalue = format!("--value:{};", {progress});
+    let value = move || format!("--value:{};", { progress.get() });
     view! { cx,
-        <div class="radial-progress bg-primary text-primary-content border-4 border-primary" style="--value:20;">{progress}</div>
+        <div class="radial-progress bg-primary text-primary-content border-4 border-primary" style={value}>{progress}"%"</div>
     }
 }
 
@@ -41,15 +41,14 @@ pub fn App(cx: Scope) -> impl IntoView {
             // <Stylesheet id="leptos" href="/pkg/tailwind.css"/>
             // <Link rel="shortcut icon" type_="image/ico" href="/favicon.ico"/>
             <Router>
-                <Nav />
+                // <Nav />
                 <main>
                     <Routes>
                         <Route path="" view=  move |cx| view! { cx, <Home/> }/>
-                        <Route path="/test" view=|cx| view! { cx,
-                            <p>"Select a contact to view more info."</p>
-                        }/>
+                        <Route path="/test" view=|cx| view! { cx, <Test/> }/>
                     </Routes>
                 </main>
+                <Footer />
             </Router>
         </>
     }
@@ -57,17 +56,35 @@ pub fn App(cx: Scope) -> impl IntoView {
 
 #[component]
 fn Home(cx: Scope) -> impl IntoView {
+    view! { cx,
+        <div class="hero min-h-screen bg-base-200">
+            <div class="hero-content text-center">
+                <div class="max-w-md">
+                    <div class="py-6 flex justify-center">
+                        <img src="/media/nick.png" width="200" class="" alt="Nick's Memoji" />
+                    </div>
+                    <h1 class="text-5xl font-bold">"👋 Hi, "
+                        <span class="bg-indigo-600 text-white rounded px-1">"I’m Nick"</span>
+                        ". Nice to meet you."
+                    </h1>
+                    <p class="py-6">"I am a Solution Architect and Cloud Engineer with a passion for building scalable, secure, and accessible applications. Also I am a Marker and Embedded system enthusiast in my spare time."</p>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+#[component]
+fn Test(cx: Scope) -> impl IntoView {
     let (count, set_count) = create_signal(cx, 0);
     let double_count = move || count() * 2;
     let tentimes_count = move || count() * 10;
     let btn = move |_| set_count.update(|count| *count += 1);
 
     view! { cx,
-        <div class="hero min-h-screen bg-base-200">
+            <div class="hero min-h-screen bg-base-200">
             <div class="hero-content text-center">
                 <div class="max-w-md">
-                    <h1 class="text-5xl font-bold">"👋 Hello there"</h1>
-                    <p class="py-6">"Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi."</p>
                     <button
                         class="btn btn-primary"
                         on:click=btn

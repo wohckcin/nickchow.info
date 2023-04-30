@@ -1,9 +1,6 @@
-mod app;
-mod routes;
-pub use routes::*;
-
-use app::*;
 use leptos::*;
+
+use nickchow_info::{App, AppProps};
 
 pub fn main() {
     _ = console_log::init_with_level(log::Level::Debug);
