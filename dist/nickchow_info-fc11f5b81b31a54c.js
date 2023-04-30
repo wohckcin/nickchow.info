@@ -790,16 +790,16 @@ imports.wbg.__wbindgen_object_drop_ref = function(arg0) {
 imports.wbg.__wbindgen_throw = function(arg0, arg1) {
     throw new Error(getStringFromWasm0(arg0, arg1));
 };
-imports.wbg.__wbindgen_closure_wrapper334 = function(arg0, arg1, arg2) {
-    const ret = makeMutClosure(arg0, arg1, 20, __wbg_adapter_32);
+imports.wbg.__wbindgen_closure_wrapper532 = function(arg0, arg1, arg2) {
+    const ret = makeMutClosure(arg0, arg1, 37, __wbg_adapter_32);
     return addHeapObject(ret);
 };
-imports.wbg.__wbindgen_closure_wrapper2788 = function(arg0, arg1, arg2) {
-    const ret = makeMutClosure(arg0, arg1, 255, __wbg_adapter_35);
+imports.wbg.__wbindgen_closure_wrapper3327 = function(arg0, arg1, arg2) {
+    const ret = makeMutClosure(arg0, arg1, 312, __wbg_adapter_35);
     return addHeapObject(ret);
 };
-imports.wbg.__wbindgen_closure_wrapper3481 = function(arg0, arg1, arg2) {
-    const ret = makeMutClosure(arg0, arg1, 318, __wbg_adapter_38);
+imports.wbg.__wbindgen_closure_wrapper4166 = function(arg0, arg1, arg2) {
+    const ret = makeMutClosure(arg0, arg1, 399, __wbg_adapter_38);
     return addHeapObject(ret);
 };
 
@@ -837,7 +837,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('nickchow_info-e7532b0440d3f0dd_bg.wasm', import.meta.url);
+        input = new URL('nickchow_info-fc11f5b81b31a54c_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 

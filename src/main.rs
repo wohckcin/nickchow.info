@@ -1,4 +1,6 @@
 mod app;
+mod routes;
+pub use routes::*;
 
 use app::*;
 use leptos::*;
