@@ -35,6 +35,12 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.toml') }}
           restore-keys: ${{ runner.os }}-cargo-
 
+      - name: Run sccache-cache
+        env:
+          SCCACHE_GHA_ENABLED: "true"
+          RUSTC_WRAPPER: "sccache"
+        uses: mozilla-actions/sccache-action@v0.0.3
+
       - name: Run Check
         run: cargo check
         continue-on-error: true
