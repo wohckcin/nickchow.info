@@ -67,7 +67,7 @@ fn Home(cx: Scope) -> impl IntoView {
                         <span class="bg-indigo-600 text-white rounded px-1">"I’m Nick"</span>
                         ". Nice to meet you."
                     </h1>
-                    <p class="py-6">"I am a Solution Architect and Cloud Engineer with a passion for building scalable, secure, and accessible applications. Also I am a Marker and Embedded system enthusiast in my spare time."</p>
+                    <p class="py-6">"I am a Solution Architect and Cloud Engineer. Also I am a Rust, DIY and Embedded Systems enthusiast in my spare time."</p>
                 </div>
             </div>
         </div>
