@@ -2,34 +2,7 @@ use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
 
-use crate::routes::*;
-
-// Components
-#[component]
-fn ProgressBar(
-    cx: Scope,
-    #[prop(default = 100)] max: u16,
-    #[prop(into)] progress: Signal<i32>,
-) -> impl IntoView {
-    view! { cx,
-        <progress
-            class="progress w-56 progress-secondary"
-            max={max}
-            value=progress
-        />
-    }
-}
-
-#[component]
-fn RadialProgress(
-    cx: Scope,
-    #[prop(into)] progress: Signal<i32>,
-) -> impl IntoView {
-    let value = move || format!("--value:{};", { progress.get() });
-    view! { cx,
-        <div class="radial-progress bg-primary text-primary-content border-4 border-primary" style={value}>{progress}"%"</div>
-    }
-}
+use crate::{counters::*, fetch::*, notfound::*, progress::*, routes::*};
 
 #[component]
 pub fn App(cx: Scope) -> impl IntoView {
@@ -46,6 +19,9 @@ pub fn App(cx: Scope) -> impl IntoView {
                     <Routes>
                         <Route path="" view=  move |cx| view! { cx, <Home/> }/>
                         <Route path="/test" view=|cx| view! { cx, <Test/> }/>
+                        <Route path="/counters" view=|cx| view! { cx, <Counters/> }/>
+                        <Route path="/fetch" view=|cx| view! { cx, <FetchExample/> }/>
+                        <Route path="/*any" view=|cx| view! { cx, <NotFound/> }/>
                     </Routes>
                 </main>
                 <Footer />
