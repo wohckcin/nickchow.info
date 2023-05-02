@@ -82,8 +82,8 @@ jobs:
           npm install -D
 
       - name: Build
-        env:
-          RUSTFLAGS: "--cfg profile=ephemeral-build"
+        # env:
+        #   RUSTFLAGS: "--cfg profile=ephemeral-build"
         run: |
           trunk build --release
 
