@@ -53,7 +53,7 @@ jobs:
 
       - name: Install trunk
         run: |
-          cargo install turnk
+          cargo install trunk
 
       # - name: Install cargo check tools
       #   run: |
