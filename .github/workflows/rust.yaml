@@ -51,9 +51,9 @@ jobs:
           cargo clippy -- -D warnings
         continue-on-error: true
 
-      # - name: Install trunk
-      #   run: |
-      #     cargo install turnk
+      - name: Install trunk
+        run: |
+          cargo install turnk
 
       # - name: Install cargo check tools
       #   run: |
