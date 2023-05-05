@@ -20,10 +20,9 @@ pub enum FetchError {
 async fn fetch_cats(count: u32) -> Result<Vec<String>, FetchError> {
     if count > 0 {
         // make the request
-        let res = reqwasm::http::Request::get(&format!(
+        let res = reqwest::get(&format!(
             "https://api.thecatapi.com/v1/images/search?limit={count}",
         ))
-        .send()
         .await
         .map_err(|_| FetchError::Request)?
         // convert it to JSON
@@ -34,6 +33,9 @@ async fn fetch_cats(count: u32) -> Result<Vec<String>, FetchError> {
         .into_iter()
         .map(|cat| cat.url)
         .collect::<Vec<_>>();
+
+        log!("{:#?}", &res);
+
         Ok(res)
     } else {
         Err(FetchError::NonZeroCats)
@@ -74,9 +76,13 @@ pub fn FetchExample(cx: Scope) -> impl IntoView {
     // so we'll just implement our happy path and let the framework handle the rest
     let cats_view = move || {
         cats.read(cx).map(|data| {
+
             data.map(|data| {
                 data.iter()
-                    .map(|s| view! { cx, <div class="carousel-item"><img class="rounded-box" src={s} /></div> })
+                    .map(|s| {
+                        log!("data: {:#?}", &s);
+                        view! { cx, <div class="carousel-item"><img class="rounded-box" src={s} /></div> }
+                    })
                     .collect::<Vec<_>>()
             })
         })
@@ -96,14 +102,15 @@ pub fn FetchExample(cx: Scope) -> impl IntoView {
                 />
             </label>
             <ErrorBoundary fallback>
-                <Transition fallback=move || {
-                    view! { cx, <div>"Loading (Suspense Fallback)..."</div> }
-                }>
-                    <div class="carousel carousel-center max-w-md p-4 space-x-4 bg-neutral rounded-box">
-                        {cats_view}
+                <Transition fallback=move || view! { cx, <div>"Loading (Suspense Fallback)..."</div> }>
+                    <div>
+                        "TEST"
                     </div>
                 </Transition>
             </ErrorBoundary>
+            <div>
+                {cats_view}
+            </div>
         </div>
     }
 }

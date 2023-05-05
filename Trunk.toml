@@ -1,8 +1,10 @@
 [build]
 target = "index.html"
-release = false
+release = true
 dist = "dist"
 public_url = "/"
+# Whether to include hash values in the output file names.
+filehash = true
 
 [watch]
 watch = ["./index.html", "src/", "style/"]

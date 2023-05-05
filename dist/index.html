@@ -1,15 +1,42 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="utf-8">
-    <script type="module">import init from '/nickchow_info-ab166f577c47940e.js';init('/nickchow_info-ab166f577c47940e_bg.wasm');</script>
+    <script type="module">import init from '/nickchow_info-299382a6319c7053.js';init('/nickchow_info-299382a6319c7053_bg.wasm');</script>
     <link rel="icon" href="/favicon-e9cbd8f50cc65bf2.ico">
     
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&amp;display=swap">
-    <link rel="stylesheet" href="/style.min-fbe4940db918e23a.css">
+    <link rel="stylesheet" href="/style.min-2de6ab4b57de6566.css">
     <title>Nick Chow Proflio</title>
 
-<link rel="preload" href="/nickchow_info-ab166f577c47940e_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-<link rel="modulepreload" href="/nickchow_info-ab166f577c47940e.js"></head>
+<link rel="preload" href="/nickchow_info-299382a6319c7053_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+<link rel="modulepreload" href="/nickchow_info-299382a6319c7053.js"></head>
 
 <body>
 
-</body></html>
+<script>(function () {
+    var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var url = protocol + '//' + window.location.host + '/_trunk/ws';
+    var poll_interval = 5000;
+    var reload_upon_connect = () => {
+        window.setTimeout(
+            () => {
+                // when we successfully reconnect, we'll force a
+                // reload (since we presumably lost connection to
+                // trunk due to it being killed, so it will have
+                // rebuilt on restart)
+                var ws = new WebSocket(url);
+                ws.onopen = () => window.location.reload();
+                ws.onclose = reload_upon_connect;
+            },
+            poll_interval);
+    };
+
+    var ws = new WebSocket(url);
+    ws.onmessage = (ev) => {
+        const msg = JSON.parse(ev.data);
+        if (msg.reload) {
+            window.location.reload();
+        }
+    };
+    ws.onclose = reload_upon_connect;
+})()
+</script></body></html>
