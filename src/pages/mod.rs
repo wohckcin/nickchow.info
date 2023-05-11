@@ -13,6 +13,18 @@ pub use notfound::*;
 mod fetch;
 pub use fetch::*;
 
+mod error;
+pub use error::*;
+
+mod user;
+pub use user::*;
+
+mod stories;
+pub use stories::*;
+
+mod story;
+pub use story::*;
+
 #[derive(Debug, Clone, Copy, Default)]
 pub enum Page {
     #[default]
@@ -20,6 +32,10 @@ pub enum Page {
     Fetch,
     Test,
     Counters,
+    Error,
+    User,
+    Story,
+    Stories,
     NotFound,
 }
 
@@ -30,6 +46,10 @@ impl Page {
             Self::Fetch => "/fetch",
             Self::Test => "/test",
             Self::Counters => "/counters",
+            Self::Error => "/error",
+            Self::User => "users/:id",
+            Self::Story => "stories/:id",
+            Self::Stories => ":stories?",
             Self::NotFound => "/*any",
         }
     }

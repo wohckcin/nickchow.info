@@ -22,6 +22,10 @@ pub fn App(cx: Scope) -> impl IntoView {
                         <Route path=Page::Test.path() view=|cx| view! { cx, <Test/> }/>
                         <Route path=Page::Counters.path() view=|cx| view! { cx, <Counters/> }/>
                         <Route path=Page::Fetch.path() view=|cx| view! { cx, <FetchExample/> }/>
+                        <Route path=Page::Error.path() view=|cx| view! { cx, <Error/> }/>
+                        <Route path=Page::User.path() view=|cx| view! { cx, <User/> }/>
+                        <Route path=Page::Stories.path() view=|cx| view! { cx, <Stories/> }/>
+                        <Route path=Page::Story.path() view=|cx| view! { cx, <Story/> }/>
                         <Route path=Page::NotFound.path() view=|cx| view! { cx, <NotFound/> }/>
                     </Routes>
                 </main>
