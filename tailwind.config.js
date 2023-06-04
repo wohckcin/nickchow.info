@@ -5,7 +5,7 @@ module.exports = {
     },
     theme: {
         fontFamily: {
-            'sans': ['"Open Sans"', 'sans-serif'],
+            'sans': ['Figtree', 'Noto Sans JP', 'Noto Sans'],
         },
         extend: {},
     },
