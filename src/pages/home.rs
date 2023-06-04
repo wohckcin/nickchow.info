@@ -3,7 +3,7 @@ use leptos::*;
 #[component]
 pub fn Home(cx: Scope) -> impl IntoView {
     view! { cx,
-        <div class="hero min-h-screen bg-base-200">
+        <div class="hero min-h-screen">
             <div class="hero-content text-center">
                 <div class="max-w-md">
                     <div class="py-6 flex justify-center">

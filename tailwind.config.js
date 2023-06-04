@@ -15,7 +15,14 @@ module.exports = {
     ],
     daisyui: {
         themes: [
-            "dracula",
+            "night",
         ],
+        // darkTheme: "dark",
+        // base: true,
+        // styled: true,
+        // utils: true,
+        // rtl: false,
+        // logs: true,
+        // prefix: "",
     },
 }
