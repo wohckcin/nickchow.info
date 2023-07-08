@@ -1,6 +1,6 @@
 use leptos::*;
 
-use nickchow_info::{App, AppProps};
+use nickchow_info::App;
 
 pub fn main() {
     _ = console_log::init_with_level(log::Level::Debug);

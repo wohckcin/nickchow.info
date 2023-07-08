@@ -1,8 +1,6 @@
 use leptos::*;
 
-use crate::components::{
-    ProgressBar, ProgressBarProps, RadialProgress, RadialProgressProps,
-};
+use crate::components::{ProgressBar, RadialProgress};
 
 #[component]
 pub fn Test(cx: Scope) -> impl IntoView {
