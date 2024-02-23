@@ -1,9 +1,8 @@
 use leptos::*;
 
 #[component]
-pub fn NotFound(cx: Scope) -> impl IntoView {
+pub fn NotFound() -> impl IntoView {
     view! {
-        cx,
         <section class="bg-red-200 pt-20 rounded-xl">
             <div class="py-6 flex justify-center">
                 <img src="/media/nick.png" width="200" class="" alt="Nick's Memoji" />

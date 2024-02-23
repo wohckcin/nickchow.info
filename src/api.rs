@@ -1,4 +1,4 @@
-use leptos::{Scope, Serializable};
+use leptos::Serializable;
 use serde::{Deserialize, Serialize};
 
 pub fn story(path: &str) -> String {
@@ -9,7 +9,7 @@ pub fn user(path: &str) -> String {
     format!("https://hacker-news.firebaseio.com/v0/user/{path}.json")
 }
 
-pub async fn fetch_api<T>(_cx: Scope, path: &str) -> Option<T>
+pub async fn fetch_api<T>(path: &str) -> Option<T>
 where
     T: Serializable,
 {

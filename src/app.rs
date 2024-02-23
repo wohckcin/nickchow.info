@@ -6,11 +6,10 @@ use leptos_router::*;
 use crate::{components::*, pages::*};
 
 #[component]
-pub fn App(cx: Scope) -> impl IntoView {
-    provide_meta_context(cx);
+pub fn App() -> impl IntoView {
+    provide_meta_context();
 
     view! {
-        cx,
         <>
             // <Stylesheet id="leptos" href="/pkg/tailwind.css"/>
             // <Link rel="shortcut icon" type_="image/ico" href="/favicon.ico"/>
@@ -18,15 +17,15 @@ pub fn App(cx: Scope) -> impl IntoView {
                 // <Nav />
                 <main>
                     <Routes>
-                        <Route path=Page::Home.path() view=  move |cx| view! { cx, <Home/> }/>
-                        <Route path=Page::Test.path() view=|cx| view! { cx, <Test/> }/>
-                        <Route path=Page::Counters.path() view=|cx| view! { cx, <Counters/> }/>
-                        <Route path=Page::Fetch.path() view=|cx| view! { cx, <FetchExample/> }/>
-                        <Route path=Page::Error.path() view=|cx| view! { cx, <Error/> }/>
-                        <Route path=Page::User.path() view=|cx| view! { cx, <User/> }/>
-                        <Route path=Page::Stories.path() view=|cx| view! { cx, <Stories/> }/>
-                        <Route path=Page::Story.path() view=|cx| view! { cx, <Story/> }/>
-                        <Route path=Page::NotFound.path() view=|cx| view! { cx, <NotFound/> }/>
+                        <Route path=Page::Home.path() view=  move || view! { <Home/> }/>
+                        <Route path=Page::Test.path() view= move || view! { <Test/> }/>
+                        <Route path=Page::Counters.path() view= move || view! { <Counters/> }/>
+                        <Route path=Page::Fetch.path() view= move || view! { <FetchExample/> }/>
+                        <Route path=Page::Error.path() view= move || view! { <Error/> }/>
+                        <Route path=Page::User.path() view= move || view! { <User/> }/>
+                        <Route path=Page::Stories.path() view= move || view! { <Stories/> }/>
+                        <Route path=Page::Story.path() view= move || view! { <Story/> }/>
+                        <Route path=Page::NotFound.path() view= move || view! { <NotFound/> }/>
                     </Routes>
                 </main>
                 <Footer />

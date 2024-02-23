@@ -3,8 +3,8 @@ use leptos::*;
 use leptos_router::*;
 
 #[component]
-pub fn NavBar(cx: Scope) -> impl IntoView {
-    view! { cx,
+pub fn NavBar() -> impl IntoView {
+    view! {
         <header class="top-0flex h-16 w-full justify-cente transition-all">
             <nav class="navbar w-full">
                 <A class="btn btn-ghost normal-case text-xl" href="/">"NC"</A>

@@ -17,7 +17,9 @@ pub enum FetchError {
     Json,
 }
 
-async fn fetch_cats(count: u32) -> Result<Vec<String>, FetchError> {
+type CatCount = usize;
+
+async fn fetch_cats(count: CatCount) -> Result<Vec<String>, FetchError> {
     if count > 0 {
         // make the request
         let res = reqwest::get(&format!(
@@ -34,7 +36,7 @@ async fn fetch_cats(count: u32) -> Result<Vec<String>, FetchError> {
         .map(|cat| cat.url)
         .collect::<Vec<_>>();
 
-        log!("{:#?}", &res);
+        // log!("{:#?}", &res);
 
         Ok(res)
     } else {
@@ -43,26 +45,26 @@ async fn fetch_cats(count: u32) -> Result<Vec<String>, FetchError> {
 }
 
 #[component]
-pub fn FetchExample(cx: Scope) -> impl IntoView {
-    let (cat_count, set_cat_count) = create_signal::<u32>(cx, 0);
+pub fn FetchExample() -> impl IntoView {
+    let (cat_count, set_cat_count) = create_signal::<CatCount>(0);
 
     // we use local_resource here because
     // 1) our error type isn't serializable/deserializable
     // 2) we're not doing server-side rendering in this example anyway
     //    (during SSR, create_resource will begin loading on the server and resolve on the client)
-    let cats = create_local_resource(cx, cat_count, fetch_cats);
+    let cats = create_local_resource(cat_count, fetch_cats);
 
-    let fallback = move |cx, errors: RwSignal<Errors>| {
+    let fallback = move |errors: RwSignal<Errors>| {
         let error_list = move || {
             errors.with(|errors| {
                 errors
                     .iter()
-                    .map(|(_, e)| view! { cx, <li><span>{e.to_string()}</span></li> })
-                    .collect::<Vec<_>>()
+                    .map(|(_, e)| view! { <li><span>{e.to_string()}</span></li> })
+                    .collect_view()
             })
         };
 
-        view! { cx,
+        view! {
             <div class="alert alert-error shadow-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 <ul>{error_list}</ul>
@@ -75,20 +77,20 @@ pub fn FetchExample(cx: Scope) -> impl IntoView {
     // and by using the ErrorBoundary fallback to catch Err(_)
     // so we'll just implement our happy path and let the framework handle the rest
     let cats_view = move || {
-        cats.read(cx).map(|data| {
+        cats.get().map(|data| {
 
             data.map(|data| {
                 data.iter()
                     .map(|s| {
-                        log!("data: {:#?}", &s);
-                        view! { cx, <div class="carousel-item"><img class="rounded-box" src={s} /></div> }
+                        // log!("data: {:#?}", &s);
+                        view! { <div class="carousel-item"><img class="rounded-box" src={s} /></div> }
                     })
-                    .collect::<Vec<_>>()
+                    .collect_view()
             })
         })
     };
 
-    view! { cx,
+    view! {
         <div>
             <label>
                 "How many cats would you like?"
@@ -96,21 +98,18 @@ pub fn FetchExample(cx: Scope) -> impl IntoView {
                     type="number"
                     prop:value=move || cat_count.get().to_string()
                     on:input=move |ev| {
-                        let val = event_target_value(&ev).parse::<u32>().unwrap_or(0);
+                        let val = event_target_value(&ev).parse::<CatCount>().unwrap_or(0);
                         set_cat_count(val);
                     }
                 />
             </label>
             <ErrorBoundary fallback>
-                <Transition fallback=move || view! { cx, <div>"Loading (Suspense Fallback)..."</div> }>
+                <Transition fallback=move || view! { <div>"Loading (Suspense Fallback)..."</div> }>
                     <div>
-                        "TEST"
+                        {cats_view}
                     </div>
                 </Transition>
             </ErrorBoundary>
-            <div>
-                {cats_view}
-            </div>
         </div>
     }
 }
